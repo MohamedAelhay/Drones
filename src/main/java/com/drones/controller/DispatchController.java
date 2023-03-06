@@ -26,7 +26,7 @@ public class DispatchController {
         return OKApiResponse(droneFacade.registerDrone(droneDto));
     }
 
-    @PatchMapping(value = "/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PatchMapping(value = "/{id}/medication", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity loadDrone(@PathVariable final Long id,
                                     @RequestPart final MedicationDto medicationDto,
                                     @RequestPart final MultipartFile imageMultiPart) {
@@ -44,5 +44,11 @@ public class DispatchController {
     public ResponseEntity getBatteryLevelByDroneId(@PathVariable final Long id) {
 
         return OKApiResponse(droneFacade.getBatteryLevelForDroneById(id));
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity getDroneById(@PathVariable final Long id) {
+
+        return OKApiResponse(droneFacade.getDroneById(id));
     }
 }

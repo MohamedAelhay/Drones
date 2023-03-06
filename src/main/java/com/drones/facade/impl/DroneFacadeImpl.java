@@ -6,6 +6,7 @@ import com.drones.api.exception.DroneMaxWeightException;
 import com.drones.api.exception.MedicationInvalidDataException;
 import com.drones.dto.MedicationDto;
 import com.drones.dto.request.DroneRegisterRequestDto;
+import com.drones.dto.response.DroneRegisterResponseDto;
 import com.drones.entity.Drone;
 import com.drones.entity.Medication;
 import com.drones.facade.DroneFacade;
@@ -43,7 +44,7 @@ public class DroneFacadeImpl implements DroneFacade {
     private final MedicationService medicationService;
 
     @Override
-    public DroneRegisterRequestDto registerDrone(final DroneRegisterRequestDto droneDto) {
+    public DroneRegisterResponseDto registerDrone(final DroneRegisterRequestDto droneDto) {
 
         Preconditions.checkArgument(Objects.nonNull(droneDto), DRONE_CANNOT_BE_NULL_ERROR);
 
@@ -59,9 +60,15 @@ public class DroneFacadeImpl implements DroneFacade {
     }
 
     @Override
-    public List<DroneRegisterRequestDto> getAllAvailableDrones() {
+    public List<DroneRegisterResponseDto> getAllAvailableDrones() {
 
         return dataMapperUtil.convertAllDronesToDto(droneService.getAllAvailableDrones());
+    }
+
+    @Override
+    public DroneRegisterResponseDto getDroneById(final Long id) {
+
+        return dataMapperUtil.convertToDto(droneService.findById(id));
     }
 
     @Override

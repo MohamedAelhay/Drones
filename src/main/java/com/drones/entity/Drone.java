@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -50,10 +47,11 @@ public class Drone extends BaseEntity {
     @Column(name = BATTERY_CAPACITY)
     private Integer batteryCapacity;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = DRONE_STATE)
     private State droneState;
 
-    @OneToMany(mappedBy = TABLE_NAME)
+    @OneToMany(mappedBy = TABLE_NAME, fetch = FetchType.EAGER)
     @JsonIgnoreProperties(TABLE_NAME)
     private List<Medication> medications = new ArrayList<>();
 }

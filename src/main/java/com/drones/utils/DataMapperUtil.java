@@ -2,6 +2,7 @@ package com.drones.utils;
 
 import com.drones.dto.request.DroneRegisterRequestDto;
 import com.drones.dto.MedicationDto;
+import com.drones.dto.response.DroneRegisterResponseDto;
 import com.drones.entity.Drone;
 import com.drones.entity.Medication;
 import org.modelmapper.ModelMapper;
@@ -24,12 +25,12 @@ public class DataMapperUtil {
         return modelMapper.map(droneDto, Drone.class);
     }
 
-    public DroneRegisterRequestDto convertToDto(final Drone drone) {
+    public DroneRegisterResponseDto convertToDto(final Drone drone) {
 
-        return modelMapper.map(drone, DroneRegisterRequestDto.class);
+        return modelMapper.map(drone, DroneRegisterResponseDto.class);
     }
 
-    public List<DroneRegisterRequestDto> convertAllDronesToDto(final List<Drone> drones) {
+    public List<DroneRegisterResponseDto> convertAllDronesToDto(final List<Drone> drones) {
 
         return drones.stream()
                 .map(this::convertToDto)
